@@ -5,3 +5,10 @@
 [x-cloak] {
     display: none;
 }
+select {
+    background-position: left 0.5rem center;
+}
+
+#addressList {
+    cursor: pointer;
+}

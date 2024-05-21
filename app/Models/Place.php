@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Place extends Model
 {
     use HasFactory;
+
+
+    public function getImageAttribute($image) {
+
+        return asset('storage/images/'.$image);
+
+    }
 }
+
+
+
+

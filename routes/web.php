@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PlaceController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +29,19 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get( '/search', [SearchController::class , 'search'])->name('search');
+Route::get( '/', [PlaceController::class , 'index'])->name('welcome');
+Route::get( '/{category:slug}', [CategoryController::class , 'places'])->name('category.places');
+
+
+
+
+
+
+
+
+
+
+
+
