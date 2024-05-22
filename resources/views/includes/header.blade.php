@@ -1,5 +1,4 @@
-{{-- <form action="{{ route('search') }}" method="post"> --}}
-<form action="#" method="post">
+<form action="{{ route('search') }}" method="post">
     @csrf
     <div class="flex flex-row p-5">
         <div class="w-6/12">
@@ -8,9 +7,9 @@
             <div id="address-list" class="cursor-pointer mt-1 "></div>
         </div>
         <div class="w-6/12">
-            <select class="p-1 py-2 mr-5 bg-gray-200 w-full rounded-md">
+            <select class="p-1 py-2 mr-5 bg-gray-200 w-full rounded-md" name="category">
                 <option value="">حدد التصنيف </option>
-                {{-- @include('includes\category_list') --}}
+                @include('includes\category_list')
             </select>
         </div>
         <div class="mr-5">
@@ -40,7 +39,7 @@
             $('#address-list').fadeIn()
             let address = $(this).val();
             $.ajax({
-                url: "{{ route('search') }}",
+                url: "{{ route('auto.complete') }}",
                 type: "GET",
                 data: {
                     "address": address

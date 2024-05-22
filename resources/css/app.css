@@ -12,3 +12,58 @@ select {
 #addressList {
     cursor: pointer;
 }
+/* progress {
+    color: red;
+} */
+progress::-moz-progress-bar {
+    background: #facc16;
+}
+progress::-webkit-progress-value {
+    background: #facc16;
+}
+progress {
+    color: #facc16;
+}
+
+.rating {
+    color: #facc16;
+}
+
+.rating > h5 {
+    color: rgb(87, 83, 83);
+}
+
+.rating:not(:checked) > input {
+    display: none;
+    cursor: pointer;
+}
+
+.rating:not(:checked) > label:before {
+    font-family: "Font Awesome 6 Free";
+    content: "\f005";
+}
+
+.rating:not(:checked) > label {
+    float: left;
+    cursor: pointer;
+    font-size: 160%;
+    color: #ddd;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: #facc16;
+}
+
+.rating > input:checked ~ label {
+    color: #facc16;
+}
+
+#place_url {
+    text-align: left;
+    unicode-bidi: plaintext;
+}
+
+#addressList {
+    cursor: pointer;
+}
