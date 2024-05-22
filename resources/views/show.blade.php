@@ -23,6 +23,7 @@
                     <input id="longitude" type="hidden" value="{{ $place->longitude }}">
                 </div>
             </div>
+
             <div class=" bg-white shadow-lg rounded p-5 h-fit">
                 <div class="p-5 bg-white shadow-sm">
                     <h3>{{ $place->user->name }}</h3>
@@ -37,12 +38,13 @@
                         class="border border-teal-500 text-xs text-teal-500 hover:bg-teal-500 hover:text-gray-100 rounded ml-3 p-1">
                         <span class=""><i class="fa-regular fa-bookmark mx-2"></i></span> علامة مرجعية
                     </a>
-                    <a href="{{ route('login') }}"
+                    <a href="{{ route('report.show') }}"
                         class="border border-red-500 text-xs text-red-500 hover:bg-red-500 hover:text-gray-200 rounded p-1">
                         <span class=""><i class="fa fa-warning mx-2"></i></span>إبلاغ موقع مكرر
                     </a>
                 </div>
             </div>
+
             <div class="col-span-2 bg-white shadow-lg rounded p-5  grid grid-cols-1 lg:grid-cols-3">
                 <div class="text-center">
                     <div>
