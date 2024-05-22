@@ -143,98 +143,98 @@
                     </div>
                 @endforeach
             </div>
-            @auth
-                @if (!auth()->user()->reviews()->wherePlace_id($place->id)->exists())
-                    <div id="review-div" class="bg-white col-span-2 shadow-lg rounded p-5">
-                        @if (session('success'))
-                            <x-alert color="blue" message="{{ session('success') }}" />
-                        @elseif(session('fail'))
-                            <x-alert color="red" message="{{ session('fail') }}" />
-                        @endif
-                        <h3 class="mb-4 mt-3">أضف مراجعة</h3>
-                        <hr />
-                        <form class="form-contact" action="{{ route('review.store') }}" method="post">
-                            @csrf
-                            <div class="grid grid-cols-2 mt-5">
-                                <div class="">
-                                    <div class="rating float-right">
-                                        <h5>الخدمة</h5>
-                                        <input type="radio" id="rating_service1" name="service_rating"
-                                            value="5" /><label for="rating_service1" title="ممتاز"></label>
-                                        <input type="radio" id="rating_service2" name="service_rating"
-                                            value="4" /><label for="rating_service2" title="جيد جدًا"></label>
-                                        <input type="radio" id="rating_service3" name="service_rating"
-                                            value="3" /><label for="rating_service3" title="متوسط"></label>
-                                        <input type="radio" id="rating_service4" name="service_rating"
-                                            value="2" /><label for="rating_service4" title="سيء"></label>
-                                        <input type="radio" id="rating_service5" name="service_rating"
-                                            value="1" /><label for="rating_service5" title="سيء للغاية"></label>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <div class="rating float-right">
-                                        <h5>الجودة</h5>
-                                        <input type="radio" id="rating_quality1" name="quality_rating"
-                                            value="5" /><label for="rating_quality1" title="ممتاز"></label>
-                                        <input type="radio" id="rating_quality2" name="quality_rating"
-                                            value="4" /><label for="rating_quality2" title="جيد جدًا"></label>
-                                        <input type="radio" id="rating_quality3" name="quality_rating"
-                                            value="3" /><label for="rating_quality3" title="متوسط"></label>
-                                        <input type="radio" id="rating_quality4" name="quality_rating"
-                                            value="2" /><label for="rating_quality4" title="سيء"></label>
-                                        <input type="radio" id="rating_quality5" name="quality_rating"
-                                            value="1" /><label for="rating_quality5" title="سيء للغاية"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2">
-                                <div class="">
-                                    <div class="rating float-right">
-                                        <h5>النظافة</h5>
-                                        <input type="radio" id="rating_cleanliness1" name="cleanliness_rating"
-                                            value="5" /><label for="rating_cleanliness1" title="ممتاز"></label>
-                                        <input type="radio" id="rating_cleanliness2" name="cleanliness_rating"
-                                            value="4" /><label for="rating_cleanliness2" title="جيد جدًا"></label>
-                                        <input type="radio" id="rating_cleanliness3" name="cleanliness_rating"
-                                            value="3" /><label for="rating_cleanliness3" title="متوسط"></label>
-                                        <input type="radio" id="rating_cleanliness4" name="cleanliness_rating"
-                                            value="2" /><label for="rating_cleanliness4" title="سيء"></label>
-                                        <input type="radio" id="rating_cleanliness5" name="cleanliness_rating"
-                                            value="1" /><label for="rating_cleanliness5" title="سيء للغاية"></label>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <div class="rating float-right">
-                                        <h5>السعر</h5>
-                                        <input type="radio" id="rating_price1" name="pricing_rating"
-                                            value="5" /><label for="rating_price1" title="ممتاز"></label>
-                                        <input type="radio" id="rating_price2" name="pricing_rating"
-                                            value="4" /><label for="rating_price2" title="جيد جدًا"></label>
-                                        <input type="radio" id="rating_price3" name="pricing_rating"
-                                            value="3" /><label for="rating_price3" title="متوسط"></label>
-                                        <input type="radio" id="rating_price4" name="pricing_rating"
-                                            value="2" /><label for="rating_price4" title="سيء"></label>
-                                        <input type="radio" id="rating_price5" name="pricing_rating"
-                                            value="1" /><label for="rating_price5" title="سيء للغاية"></label>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="mt-4">
-                                <div class="form-group">
-                                    <textarea class="border w-full" name="review" id="review" cols="30" rows="9"></textarea>
+            @auth
+                <div id="review-div" class="bg-white col-span-2 shadow-lg rounded p-5">
+                    @if (session('success'))
+                        <x-alert color="blue" message="{{ session('success') }}" />
+                    @elseif(session('fail'))
+                        <x-alert color="red" message="{{ session('fail') }}" />
+                    @endif
+                    <h3 class="mb-4 mt-3">أضف مراجعة</h3>
+                    <hr />
+                    <form class="form-contact" action="{{ route('review.store') }}" method="post">
+                        @csrf
+                        <div class="grid grid-cols-2 mt-5">
+                            <div class="">
+                                <div class="rating float-right">
+                                    <h5>الخدمة</h5>
+                                    <input type="radio" id="rating_service1" name="service_rating"
+                                        value="5" /><label for="rating_service1" title="ممتاز"></label>
+                                    <input type="radio" id="rating_service2" name="service_rating"
+                                        value="4" /><label for="rating_service2" title="جيد جدًا"></label>
+                                    <input type="radio" id="rating_service3" name="service_rating"
+                                        value="3" /><label for="rating_service3" title="متوسط"></label>
+                                    <input type="radio" id="rating_service4" name="service_rating"
+                                        value="2" /><label for="rating_service4" title="سيء"></label>
+                                    <input type="radio" id="rating_service5" name="service_rating"
+                                        value="1" /><label for="rating_service5" title="سيء للغاية"></label>
                                 </div>
-                                @error('review')
-                                    <x-alert color="red" message="{{ $message }}" />
-                                @enderror
-                                <input class="form-control" name="place_id" id="place_id" type="hidden"
-                                    value="{{ $place->id }}">
-                                <button type="submit"
-                                    class="mt-3 bg-blue-600 text-gray-200 rounded hover:bg-blue-500 px-4 py-2 focus:outline-none">إرسال</button>
                             </div>
-                        </form>
-                    </div>
-                @endif
+                            <div class="">
+                                <div class="rating float-right">
+                                    <h5>الجودة</h5>
+                                    <input type="radio" id="rating_quality1" name="quality_rating"
+                                        value="5" /><label for="rating_quality1" title="ممتاز"></label>
+                                    <input type="radio" id="rating_quality2" name="quality_rating"
+                                        value="4" /><label for="rating_quality2" title="جيد جدًا"></label>
+                                    <input type="radio" id="rating_quality3" name="quality_rating"
+                                        value="3" /><label for="rating_quality3" title="متوسط"></label>
+                                    <input type="radio" id="rating_quality4" name="quality_rating"
+                                        value="2" /><label for="rating_quality4" title="سيء"></label>
+                                    <input type="radio" id="rating_quality5" name="quality_rating"
+                                        value="1" /><label for="rating_quality5" title="سيء للغاية"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2">
+                            <div class="">
+                                <div class="rating float-right">
+                                    <h5>النظافة</h5>
+                                    <input type="radio" id="rating_cleanliness1" name="cleanliness_rating"
+                                        value="5" /><label for="rating_cleanliness1" title="ممتاز"></label>
+                                    <input type="radio" id="rating_cleanliness2" name="cleanliness_rating"
+                                        value="4" /><label for="rating_cleanliness2" title="جيد جدًا"></label>
+                                    <input type="radio" id="rating_cleanliness3" name="cleanliness_rating"
+                                        value="3" /><label for="rating_cleanliness3" title="متوسط"></label>
+                                    <input type="radio" id="rating_cleanliness4" name="cleanliness_rating"
+                                        value="2" /><label for="rating_cleanliness4" title="سيء"></label>
+                                    <input type="radio" id="rating_cleanliness5" name="cleanliness_rating"
+                                        value="1" /><label for="rating_cleanliness5" title="سيء للغاية"></label>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="rating float-right">
+                                    <h5>السعر</h5>
+                                    <input type="radio" id="rating_price1" name="pricing_rating"
+                                        value="5" /><label for="rating_price1" title="ممتاز"></label>
+                                    <input type="radio" id="rating_price2" name="pricing_rating"
+                                        value="4" /><label for="rating_price2" title="جيد جدًا"></label>
+                                    <input type="radio" id="rating_price3" name="pricing_rating"
+                                        value="3" /><label for="rating_price3" title="متوسط"></label>
+                                    <input type="radio" id="rating_price4" name="pricing_rating"
+                                        value="2" /><label for="rating_price4" title="سيء"></label>
+                                    <input type="radio" id="rating_price5" name="pricing_rating"
+                                        value="1" /><label for="rating_price5" title="سيء للغاية"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <div class="form-group">
+                                <textarea class="border w-full" name="review" id="review" cols="30" rows="9"></textarea>
+                            </div>
+                            @error('review')
+                                <x-alert color="red" message="{{ $message }}" />
+                            @enderror
+                            <input class="form-control" name="place_id" id="place_id" type="hidden"
+                                value="{{ $place->id }}">
+                            <button type="submit"
+                                class="mt-3 bg-blue-600 text-gray-200 rounded hover:bg-blue-500 px-4 py-2 focus:outline-none">إرسال</button>
+                        </div>
+                    </form>
+                </div>
+
             @endauth
             <div id="review-div" class="bg-white col-span-2 shadow-lg rounded p-5">
             </div>
