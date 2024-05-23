@@ -38,6 +38,7 @@ Route::post('/report/store', [ReportController::class, 'store'])->name('report.s
 Route::get('/', [PlaceController::class, 'index'])->name('welcome');
 Route::get('/show/{place}/{slug}', [PlaceController::class, 'show'])->name('place.show');
 Route::get('/place/create', [PlaceController::class, 'create'])->name('place.create');
+Route::get('/place/store', [PlaceController::class, 'store'])->name('place.store');
 
 Route::get('/auto-complete', [SearchController::class, 'autoComplete'])->name('auto.complete');
 Route::post('/search', [SearchController::class, 'search'])->name('search');
