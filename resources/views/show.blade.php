@@ -138,6 +138,30 @@
                                         <span class="border rounded text-xs p-1"><i class="fa fa-thumbs-up"></i> {{ $review->likes_count }}</span>
                                     @endauth
                                 </div>                                --}}
+
+
+                                    <div class="mt-3">
+                                        @auth
+                                            <button data-review ="{{ $review->id }}"
+                                                class="flex btn-like items-center justify-center gap-2 h-8 px-4 rounded-lg border hover:shadow-sm">
+                                                @if (Auth::user()->alerdyLike($review->id))
+                                                    <i class="fa-regular fa-thumbs-down"></i>
+                                                    <small class="text-neutral-900">إلغاء االإعجاب</small>
+                                                @else
+                                                    <i class="fa-regular fa-thumbs-up"></i>
+                                                    <small class="text-neutral-900">أعجبني</small>
+                                                @endif
+                                                <span
+                                                    class="text-xs text-neutral-700 count-likes">{{ $review->likes_count }}</span>
+                                            </button>
+                                        @else
+                                            <div
+                                                class="flex items-center justify-center gap-2 h-8 px-4 rounded-lg border hover:shadow-sm">
+                                                <i class="fa-regular fa-thumbs-up"></i>
+                                                <span class="text-xs text-neutral-700">2</span>
+                                            </div>
+                                        @endauth
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -242,6 +266,38 @@
             </div>
 
         </div>
-
     </div>
 </x-app-layout>
+
+
+<script>
+    $('.btn-like').on('click', function() {
+        let review = $(this).attr('data-review')
+        let btnReview = $(this)
+        $.ajax({
+            url: "{{ route('like.store') }}",
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                review_id: review
+            }
+        }).done(function(data) {
+            if (!data) {
+                alert('لايمكن إضافة مراجعة ')
+                return
+            }
+            if ($.trim(btnReview.find('small').text()) == 'أعجبني') {
+                btnReview.html(
+                    '<i class="fa-regular fa-thumbs-down"></i><small class="text-neutral-900">إالغاء الإعجاب</small><span class="text-xs text-neutral-700 count-likes">' +
+                    data + '</span>')
+            } else {
+                btnReview.html(
+                    '<i class="fa-regular fa-thumbs-up"></i><small class="text-neutral-900">أعجبني</small><span class="text-xs text-neutral-700 count-likes">' +
+                    data + '</span>')
+            }
+            // console.log( $.trim(($this).find('small').text()) == 'أعجبني')
+        })
+    })
+</script>

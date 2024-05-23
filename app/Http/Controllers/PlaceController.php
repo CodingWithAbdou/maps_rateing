@@ -23,7 +23,7 @@ class PlaceController extends Controller
      */
     public function create()
     {
-        //
+        return view('craete_palce');
     }
 
     /**
@@ -41,7 +41,10 @@ class PlaceController extends Controller
     {
 
         $avg = $this->averageRating($place);
-        $place = $place->withCount('reviews')->with('reviews.user')->find($place->id);
+        $place = $place->withCount('reviews')->with(['reviews' => function ($query) {
+            $query->with('user')
+                ->withCount('likes');
+        }])->find($place->id);
         $total =  $avg['total'];
         $service_rating =  $avg['service_rating'];
         $quality_rating =  $avg['quality_rating'];
