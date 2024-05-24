@@ -18,9 +18,6 @@
                 <div class="mt-5 ">
                     <h3 class="mb-4 text-2xl">الموقع</h3>
                     <div id="mapid" style="height: 350px;"></div>
-                    <input id="name" type="hidden" value="{{ $place->name }}">
-                    <input id="latitude" type="hidden" value="{{ $place->latitude }}">
-                    <input id="longitude" type="hidden" value="{{ $place->longitude }}">
                 </div>
             </div>
 
@@ -271,6 +268,19 @@
 
 
 <script>
+    var longitude = {{ $place->latitude }};
+    var latitude = {{ $place->longitude }};
+
+    var map = L.map('mapid', {
+        center: [latitude, longitude],
+        zoom: 13
+    });
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    L.marker([latitude, longitude]).bindPopup('{{ $place->name }}').addTo(map).openPopup();
+
+
+
     $('.btn-like').on('click', function() {
         let review = $(this).attr('data-review')
         let btnReview = $(this)
@@ -299,5 +309,6 @@
             }
             // console.log( $.trim(($this).find('small').text()) == 'أعجبني')
         })
+
     })
 </script>

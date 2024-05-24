@@ -1,43 +1,68 @@
 <x-app-layout>
     <x-slot name="header">
-        @include('includes.header')
+        @include('includes/header')
     </x-slot>
 
-    <div class="container my-12 mx-auto px-4">
-        <div class="flex flex-wrap -mx-1 lg:-mx-4">
-            @if ($places->count() == 0)
-                <div class="flex items-center p-4 text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300 w-full"
-                    role="alert">
-                    <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                    </svg>
-                    <span class="sr-only">Info</span>
-                    <div>
-                        <span class="font-medium">لاتوجد أماكن تحت هذا التصنيف</span>
-                    </div>
-                </div>
-            @endif
-            @foreach ($places as $place)
-                <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
-                    <article class="overflow-hidden rounded-lg shadow-lg bg-white">
-                        <a href="{{ route('place.show', [$place->id, $place->slug]) }}">
-                            <img alt="Placeholder" class="block h-auto w-full" src="{{ $place->image }}">
-                        </a>
-                        <header class="items-center justify-between leading-tight p-2 md:p-4">
-                            <h1 class="text-base mb-3">
-                                <a class="no-underline hover:underline text-black"
-                                    href="{{ route('place.show', [$place->id, $place->slug]) }}">
-                                    {{ $place->name }}
+    <div class="py-12">
+        @if (!$places->count())
+            <div class="text-blue-900 px-6 py-4 rounded relative bg-gray-200 max-w-7xl mx-auto">
+                <span class="inline-block align-middle mr-8">
+                    لا يوجد مواقع ضمن هذا التصنيف.
+                </span>
+            </div>
+        @else
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div>
+                    @foreach ($places as $place)
+                        <div class="flex mb-5 bg-white">
+                            <div class="flex-none w-48 relative">
+                                <a href="{{ route('place.show', [$place->id, $place->slug]) }}">
+                                    <img src="{{ $place->image }}" alt=""
+                                        class="absolute inset-0 w-full h-full object-cover" />
                                 </a>
-                            </h1>
-                            <h4 class="text-xs"> {{ $place->address }}</h4>
-                        </header>
-                    </article>
+                            </div>
+                            <div class="flex-auto p-6">
+                                <div class="flex flex-wrap">
+                                    <h1 class="flex-auto text-xl font-semibold">
+                                        {{ $place->name }}
+                                    </h1>
+                                </div>
+                                <div class="flex space-x-3 mb-4 text-sm font-medium mt-5">
+                                    <div class="flex-auto flex space-x-3">
+                                        {{ $place->address }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-            @endforeach
-        </div>
+
+                <div class="ml-3">
+                    <div id="mapid" style="height: 500px"></div>
+                </div>
+                <div>
+        @endif
     </div>
 
 </x-app-layout>
+<script>
+    var longitude = {!! $places->pluck('longitude') !!}
+    var latitude = {!! $places->pluck('latitude') !!}
+    console.log(longitude)
+    console.log(latitude)
+    var map = L.map('mapid');
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    var markers = [];
+
+    for (var i = 0; i < longitude.length; i++) {
+        markers.push(new L.marker([latitude[i], longitude[i]]).addTo(map));
+    }
+
+    var group = new L.featureGroup(markers).getBounds();
+
+    map.fitBounds([
+        group
+    ]);
+</script>

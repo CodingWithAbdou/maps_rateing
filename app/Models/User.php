@@ -67,6 +67,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Review::class, 'likes');
     }
+    public function places()
+    {
+        return $this->hasMany(Place::class);
+    }
 
     public function alerdyLike($review_id)
     {
