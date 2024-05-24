@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReviewRequest;
 use App\Models\Review;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
-    public function store(Request $request)
+    public function store(ReviewRequest $request)
     {
         if (auth()->user()->reviews()->wherePlace_id($request->place_id)->exists()) {
             return redirect(url()->previous()  . '#review-div')->with('fail', 'لقد قيّمت هذا الموقع مسبقًا');
