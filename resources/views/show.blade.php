@@ -31,11 +31,13 @@
                 </div>
                 <hr />
                 <div class="py-4">
-                    <a href="{{ route('login') }}"
+                    <a href="@auth {{ route('bookmark.store', $place) }} @else {{ route('login') }} @endauth"
                         class="border border-teal-500 text-xs text-teal-500 hover:bg-teal-500 hover:text-gray-100 rounded ml-3 p-1">
-                        <span class=""><i class="fa-regular fa-bookmark mx-2"></i></span> علامة مرجعية
+                        <span class=""><i
+                                class=" fa-bookmark mx-2  {{ auth()->user()->alreadyBookmark($place->id)? 'fa-solid text-yellow-500': 'fa-regular' }} "></i></span>
+                        علامة مرجعية
                     </a>
-                    <a href="{{ route('report.show') }}"
+                    <a href="@auth {{ route('report.show') }} @else {{ route('login') }} @endauth"
                         class="border border-red-500 text-xs text-red-500 hover:bg-red-500 hover:text-gray-200 rounded p-1">
                         <span class=""><i class="fa fa-warning mx-2"></i></span>إبلاغ موقع مكرر
                     </a>
@@ -124,18 +126,6 @@
                                         @endfor
                                     </div>
                                     <div class="review-block-description ">{{ $review->review }}</div>
-
-                                    {{-- <div class="mt-3">
-                                    @auth
-                                    <button id="like" type="button" data-id="{{$review->id}}" class="border rounded p-1 text-xs like">
-                                        {!! Auth::user()->alreadyliked($review->id) ? '<i class="fa fa-thumbs-down"></i><small> إلغاء الإعجاب </small>' : '<i class="fa fa-thumbs-up"></i><small> أعجبني </small>' !!}
-                                        <span>{{ $review->likes_count }}</span>
-                                    </button>
-                                    @else
-                                        <span class="border rounded text-xs p-1"><i class="fa fa-thumbs-up"></i> {{ $review->likes_count }}</span>
-                                    @endauth
-                                </div>                                --}}
-
 
                                     <div class="mt-3">
                                         @auth
