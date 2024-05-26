@@ -15,6 +15,9 @@ class RoleMiddelleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if (\Auth::user() && $request->user()->hasRole('Owner')) {
+            return $next($request);
+        }
+        return redirect()->route('welcome');
     }
 }

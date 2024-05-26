@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        \Blade::if('owner', function () {
+            return auth()->check() && auth()->user()->hasRole('Owner');
+        });
         view()->composer(['includes.header', 'includes.category_list'], "App\Http\ViewComposers\CategoryComposer");
     }
 }

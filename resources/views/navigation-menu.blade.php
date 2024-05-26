@@ -15,12 +15,14 @@
                         <x-nav-link href="{{ route('welcome') }}" :active="request()->routeIs('welcome')">
                             {{ __('الرئيسة') }}
                         </x-nav-link>
-                        <x-nav-link href="{{ route('place.create') }}" :active="request()->routeIs('place.create')">
-                            <span class="text-neutral-800 ">
-                                {{ __('إضافة موقع') }}
-                                <i class="fa-solid fa-plus mx-2"></i>
-                            </span>
-                        </x-nav-link>
+                        @owner
+                            <x-nav-link href="{{ route('place.create') }}" :active="request()->routeIs('place.create')">
+                                <span class="text-neutral-800 ">
+                                    {{ __('إضافة موقع') }}
+                                    <i class="fa-solid fa-plus mx-2"></i>
+                                </span>
+                            </x-nav-link>
+                        @endowner
                     </div>
                 @endauth
 

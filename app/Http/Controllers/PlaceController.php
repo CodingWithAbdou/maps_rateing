@@ -12,6 +12,8 @@ class PlaceController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+
     public function index()
     {
         $places = Place::class::orderBy('view_count', 'desc')->take(3)->get();
