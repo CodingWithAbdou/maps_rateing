@@ -283,7 +283,7 @@
             }
         }).done(function(data) {
             if (!data) {
-                alert('لايمكن إضافة مراجعة ')
+                alert(' لايمكن إضافة إعجاب لتعليقك ')
                 return
             }
             if ($.trim(btnReview.find('small').text()) == 'أعجبني') {
